@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS filter</title>
+</head>
+<body>
+    <h1>AngularJS过滤器应用实例</h1>
+    <div ng-app="mainApp" ng-controller="studentController">
+        <table border="0">
+            <tr>
+                <td>
+                    Enter subject:
+                </td>
+                <td>
+                    <input type="text" ng-model="subjectName">
+                </td>
+            </tr>
+            <tr>
+                <td>Subject:</td>
+                <td>
+                    <ul>
+                        <li ng-repeat="subject in student.subjects | filter:subjectName | orderBy:'marks'">
+                            {{subject.name + ',marks'+subject.marks}}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="angular.min.js"></script>
+    <script>
+        var mainApp = angular.module("mainApp",[]);
+        mainApp.controller('studentController',function ($scope) {
+            $scope.student = {
+                firstName: "李",
+                lastName: "刚",
+                subjects:[
+                    {name:'物理',marks:70},
+                    {name:'化学',marks:80},
+                    {name:'数学',marks:65},
+                    {name:'外语', marks:87}
+                ],
+                fullName: function() {
+                    var studentObject;
+                    studentObject = $scope.student;
+                    return studentObject.firstName + " " + studentObject.lastName;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

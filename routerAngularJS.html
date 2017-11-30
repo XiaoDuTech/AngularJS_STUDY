@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS 视图应用实例</title>
+    <style>
+    </style>
+</head>
+<body>
+<h1>AngularJS 视图应用实例</h1>
+<div ng-app="mainApp">
+    <p>
+        <a href="#addStudent">添加学生</a>
+        <a href="#viewStudent">查看学生</a>
+        <div ng-view></div>
+        <script type="text/ng-template" id="addStudent.html">
+            <h2>添加学生</h2>
+            {{message}}
+        </script>
+        <script type="text/ng-template" id="viewStudent.html">
+            <h2>查看学生</h2>
+            {{message}}
+        </script>
+    </p>
+</div>
+<script src="angular.min.js"></script>
+<script src="angular-route.min.js"></script>
+<script>
+    var mainApp = angular.module("mainApp",['ngRoute']);
+    mainApp.config(['$routeProvider',function ($routeProvider) {
+        $routeProvider.
+            when('/addStudent',{
+                templateUrl:'addStudent.html',
+                controller:'AddStudentController'
+            }).
+            when('/viewStudent',{
+                templateUrl:'viewStudent.html',
+                controller:'ViewStudentController'
+            }).
+            otherwise({
+                redirectTo:'/'
+        });
+    }]);
+    mainApp.controller('AddStudentController',function ($scope) {
+        $scope.message = "这个页面是用于显示学生信息的输入表单";
+    });
+    mainApp.controller('ViewStudentController',function ($scope) {
+        $scope.message = "这个页面是用于显示所有学生信息";
+    })
+
+</script>
+</body>
+</html>

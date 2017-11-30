@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Include</title>
+</head>
+<body>
+    <h2>AngularJS Include示例</h2>
+    <div ng-app="mainApp" ng-controller="studentController">
+        <div ng-include="'include.html'"></div>
+    </div>
+
+    <script src="angular.min.js"></script>
+    <script>
+        var mainApp = angular.module("mainApp",[]);
+        mainApp.controller('studentController',function ($scope) {
+            $scope.name = '11111';
+            $scope.helloTo = {title:111112};
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS filter</title>
+</head>
+<body>
+    <h1>AngularJS DOM应用实例</h1>
+    <div ng-app="">
+        <table border="0">
+            <tr>
+                <td>
+                    <input type="checkbox" ng-model="enableDisableBtn">Disable Btn
+                </td>
+                <td>
+                    <button ng-disabled="enableDisableBtn">点击我！</button>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" ng-model="showHide1">Show Btn
+                </td>
+                <td>
+                    <button ng-show="showHide1">显示按钮</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" ng-model="showHide2">Hide Btn
+                </td>
+                <td>
+                    <button ng-hide="showHide2">隐藏按钮</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <p>Total click:{{clickCounter}}</p>
+                </td>
+                <td>
+                    <button ng-click="clickCounter = clickCounter+1">点击我！</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="angular.min.js"></script>
+    <script>
+    </script>
+</body>
+</html>
