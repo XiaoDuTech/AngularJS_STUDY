@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS inject应用实例</title>
+    <style>
+    </style>
+</head>
+<body>
+<h1>AngularJS inject应用实例</h1>
+<div ng-app="mainApp" ng-controller="CalcController">
+    <p>
+        输入一个数字：<input type="number" ng-model="number">
+        <button ng-click="square()">X<sup>2</sup></button>
+    </p>
+    <p>结果：{{result}}</p>
+</div>
+<script src="angular.min.js"></script>
+<script>
+    var mainApp = angular.module("mainApp",[]);
+    mainApp.config(function ($provide) {
+        $provide.provider('MathService',function () {
+            this.$get = function () {
+                var factory = {};
+                factory.multiply = function (a, b) {
+                    return a * b;
+                }
+                return factory;
+            }
+        })
+    });
+    mainApp.value("defaultInput",5);
+    mainApp.service('CalcService',function (MathService) {
+        this.square = function (a) {
+            return MathService.multiply(a,a)
+        }
+    });
+    mainApp.controller('CalcController',function ($scope, CalcService,defaultInput) {
+        $scope.number = defaultInput;
+        $scope.result = CalcService.square($scope.number);
+        $scope.square = function () {
+            $scope.result = CalcService.square($scope.number);
+        }
+    });
+
+</script>
+</body>
+</html>

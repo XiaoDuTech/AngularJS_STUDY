@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS services应用实例</title>
+    <style>
+    </style>
+</head>
+<body>
+<h1>AngularJS services应用实例</h1>
+<div ng-app="mainApp" ng-controller="CalcController">
+    <p>输入一个数字：<input type="number" ng-model="number"></p>
+    <button ng-click="square()">X<sup>2</sup></button>
+    <p>结果：{{result}}</p>
+</div>
+<script src="angular.min.js"></script>
+<script>
+    var mainApp = angular.module("mainApp",[]);
+    mainApp.factory('MathService',function () {
+        var factory = {};
+        factory.multiply = function (a, b) {
+            return a*b;
+        }
+        return factory;
+    });
+    mainApp.service('CalcService',function (MathService) {
+        this.square = function (a) {
+            return MathService.multiply(a,a)
+        }
+    });
+    mainApp.controller('CalcController',function ($scope, CalcService) {
+        $scope.square = function () {
+            $scope.result = CalcService.square($scope.number);
+        }
+    });
+
+</script>
+</body>
+</html>

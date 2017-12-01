@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS directive应用实例</title>
+    <style>
+    </style>
+</head>
+<body>
+<h1>AngularJS directive应用实例</h1>
+<div ng-app="mainApp" ng-controller="StudentController">
+    <student name="Mahesh"></student><br>
+    <student name="Piyush"></student>
+</div>
+<script src="angular.min.js"></script>
+<script>
+    var mainApp = angular.module("mainApp",[]);
+    mainApp.directive('student',function () {
+        var directive = {};
+        directive.restrict = 'E';
+        directive.template = "Student:<b>{{student.name}}</b>,编号：<b>{{student.rollno}}</b>"
+        directive.scope = {
+            student:"=name"
+        };
+        directive.compile = function (element, attributes) {
+            element.css("border","1px solid #cccccc");
+            var linkFunction = function ($scope, element, attributes) {
+                element.html("Student:<b>"+$scope.student.name+"</b>,Rool No:<b>"+$scope.student.rollno+"</b><br>");
+                element.css("background-color","#eee");
+            }
+            return linkFunction;
+        };
+        return directive;
+    });
+    mainApp.controller('StudentController',function ($scope) {
+        $scope.Mahesh = {};
+        $scope.Mahesh.name = "张学友";
+        $scope.Mahesh.rollno = 100;
+
+        $scope.Piyush = {};
+        $scope.Piyush.name = "陈奕迅";
+        $scope.Piyush.rollno = 102;
+    })
+</script>
+</body>
+</html>
